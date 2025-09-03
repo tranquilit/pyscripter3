@@ -74,6 +74,20 @@ type
     property PythonEngine : TPythonEngine read fPythonEngine;
   end;
 
+  IPyEngineAndGIL = interface
+    function GetPyEngine: TPythonEngine;
+    function GetThreadState: PPyThreadState;
+    property PythonEngine: TPythonEngine read GetPyEngine;
+    property ThreadState: PPyThreadState read GetThreadState;
+  end;
+
+{ Access the PythonEngine with thread safety}
+function SafePyEngine: IPyEngineAndGIL;
+
+{ Executes Python code in a Delphi thread }
+procedure ThreadPythonExec(ExecuteProc : TProc; TerminateProc : TProc = nil;
+  ThreadExecMode : TThreadExecMode = emNewState);
+
 implementation
 
 uses
@@ -176,9 +190,9 @@ begin
 
   fPythonEngine.Name := 'PythonEngine';
   fPythonEngine.AutoLoad := False;
-  fPythonEngine.DllName := 'python27.dll';
-  fPythonEngine.APIVersion := 1012;
-  fPythonEngine.RegVersion := '2.7';
+  fPythonEngine.DllName := 'python39.dll';
+  fPythonEngine.APIVersion := 1013;
+  fPythonEngine.RegVersion := '3.9';
   fPythonEngine.FatalAbort := False;
   fPythonEngine.FatalMsgDlg := False;
   fPythonEngine.UseLastKnownVersion := False;
@@ -212,6 +226,7 @@ Var
 begin
   WasLoaded := Loaded;
   if WasLoaded then begin
+    TPythonThread.Py_End_Allow_Threads;
     PyscripterModule.DeleteVar('IDEOptions');
     RegVersion := fPythonEngine.RegVersion;
     Delete(RegVersion, 2, 1);
@@ -356,12 +371,7 @@ end;
 procedure TInternalPython.PythonEngineAfterInit(Sender: TObject);
 begin
   // Execute initialization script
-  with PythonEngine do begin
-    if IsPython3000 then
-      ExecStrings(GI_PyIDEServices.GetStoredScript('InitScript3000'))
-    else
-      ExecStrings(GI_PyIDEServices.GetStoredScript('InitScript'));
-  end;
+  PythonEngine.ExecStrings(GI_PyIDEServices.GetStoredScript('InitScript'));
 
   // Update Highlighter keywords
   GI_PyInterpreter.UpdatePythonKeywords;
@@ -423,6 +433,102 @@ begin
   MaskFPUExceptions(False);
   PyIDEOptions.MaskFPUExceptions := False;
   Result := PythonEngine.ReturnNone;
+end;
+
+type
+  TPyEngineAndGIL = class(TInterfacedObject, IPyEngineAndGIL)
+  fPythonEngine: TPythonEngine;
+  fThreadState: PPyThreadState;
+  fGILState: PyGILstate_STATE;
+  private
+    function GetPyEngine: TPythonEngine;
+    function GetThreadState: PPyThreadState;
+  public
+    constructor Create;
+    destructor Destroy; override;
+  end;
+
+{ TPyEngineAndGIL }
+
+constructor TPyEngineAndGIL.Create;
+begin
+  inherited Create;
+  fPythonEngine := GetPythonEngine;
+  fGILState := fPythonEngine.PyGILState_Ensure;
+  fThreadState := fPythonEngine.PyThreadState_Get;
+end;
+
+destructor TPyEngineAndGIL.Destroy;
+begin
+  fPythonEngine.PyGILState_Release(fGILState);
+  inherited;
+end;
+
+function TPyEngineAndGIL.GetPyEngine: TPythonEngine;
+begin
+  Result := fPythonEngine;
+end;
+
+function TPyEngineAndGIL.GetThreadState: PPyThreadState;
+begin
+  Result := fThreadState;
+end;
+
+{ Access the PythonEngine with thread safety}
+function SafePyEngine: IPyEngineAndGIL;
+begin
+  Result := TPyEngineAndGIL.Create
+end;
+
+{ TAnonymousPythonThread }
+type
+TAnonymousPythonThread = class(TPythonThread)
+private
+  fTerminateProc : TProc;
+  fExecuteProc : TProc;
+  procedure DoTerminate; override;
+public
+  procedure ExecuteWithPython; override;
+  constructor Create(ExecuteProc : TProc; TerminateProc : TProc = nil;
+    AThreadExecMode : TThreadExecMode = emNewState);
+end;
+
+constructor TAnonymousPythonThread.Create(ExecuteProc : TProc; TerminateProc : TProc = nil;
+    AThreadExecMode : TThreadExecMode = emNewState);
+begin
+  fExecuteProc := ExecuteProc;
+  fTerminateProc := TerminateProc;
+  FreeOnTerminate := True;
+  ThreadExecMode := AThreadExecMode;
+  inherited Create;
+end;
+
+procedure TAnonymousPythonThread.ExecuteWithPython;
+begin
+  if Assigned(fExecuteProc) then
+    try
+        fExecuteProc();
+    except
+    end;
+end;
+
+procedure TAnonymousPythonThread.DoTerminate;
+begin
+  if Assigned(fTerminateProc) then
+    TThread.Synchronize(nil, procedure
+    begin
+        fTerminateProc();
+    end);
+end;
+
+{ ThreadPythonExec }
+
+procedure ThreadPythonExec(ExecuteProc : TProc; TerminateProc : TProc = nil;
+  ThreadExecMode : TThreadExecMode = emNewState);
+begin
+  if GetCurrentThreadId <> MainThreadID then
+    raise Exception.Create('ThreadPythonExec should only be called from the main thread');
+  TAnonymousPythonThread.Create(ExecuteProc, TerminateProc, ThreadExecMode);
 end;
 
 end.

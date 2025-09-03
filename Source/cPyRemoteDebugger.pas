@@ -260,7 +260,7 @@ begin
         PyFullInfoTuple := ExtractPythonObjectFrom(FullInfoTuple);
         for i := 0 to fChildCount - 1 do with GetPythonEngine do begin
           PyMemberInfo := PyTuple_GetItem(PyFullInfoTuple, i);
-          ObjName :=  PyString_AsWideString(PyTuple_GetItem(PyMemberInfo, 0));
+          ObjName :=  PyUnicodeAsString(PyTuple_GetItem(PyMemberInfo, 0));
           PyFullInfo := PyTuple_GetItem(PyMemberInfo, 1);
           APyObject := VarPythonCreate(PyTuple_GetItem(PyFullInfo, 0));
 
@@ -270,8 +270,8 @@ begin
 
 //          NameSpaceItem.BufferedValue := PyString_AsWideString(PyTuple_GetItem(PyFullInfo, 1));
 //          NameSpaceItem.GotBufferedValue := True;
-          NameSpaceItem.fObjectType := PyString_AsWideString(PyTuple_GetItem(PyFullInfo, 1));
-          NameSpaceItem.fObjectInfo := PyInt_AsLong(PyTuple_GetItem(PyFullInfo, 2));
+          NameSpaceItem.fObjectType := PyUnicodeAsString(PyTuple_GetItem(PyFullInfo, 1));
+          NameSpaceItem.fObjectInfo := PyLong_AsLong(PyTuple_GetItem(PyFullInfo, 2));
 //          if NameSpaceItem.IsProxy then
 //            NameSpaceItem.fChildCount := PyInt_AsLong(PyTuple_GetItem(PyFullInfo, 3))
 //          else
@@ -1915,7 +1915,7 @@ end;
 procedure TPyRemDebugger.UserYield(Sender: TObject; PSelf, Args: PPyObject;
   var Result: PPyObject);
 begin
-  Result := GetPythonEngine.PyInt_FromLong(Ord(fDebuggerCommand));
+  Result := GetPythonEngine.PyLong_FromLong(Ord(fDebuggerCommand));
 end;
 
 end.

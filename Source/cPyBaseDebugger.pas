@@ -408,7 +408,7 @@ end;
 
 function TPyBaseInterpreter.IsPython3000: Boolean;
 begin
-  Result := GetPythonEngine.IsPython3000;
+  Result := True;
 end;
 
 procedure TPyBaseInterpreter.ReInitialize;
