@@ -1,7 +1,7 @@
 ﻿; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 #define MyAppName "PyScripter"
-#define MyAppVersion "3.6.4"
-#define OSPlatform "x64"
+#define MyAppVersion "3.7.0"
+#define OSPlatform "x86"
 #define MyAppPublisherURL="https://sourceforge.net/projects/pyscripter/"
 #define MyAppSupportURL="https://github.com/pyscripter/pyscripter"
 #define MyAppUpdatesURL="https://sourceforge.net/projects/pyscripter/"
@@ -33,10 +33,10 @@ ArchitecturesInstallIn64BitMode={#OSPlatform}
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"; InfoAfterFile: "locale\en\AfterInstallPyScripter-{#OSPlatform}.txt"
-Name: "de"; MessagesFile: "compiler:\Languages\German.isl"; InfoAfterFile: "locale\de\AfterInstallPyScripter-{#OSPlatform}.txt"
-Name: "el"; MessagesFile: "compiler:\Languages\Greek.isl"; InfoAfterFile: "locale\el\AfterInstallPyScripter-{#OSPlatform}.txt"
-Name: "it"; MessagesFile: "compiler:\Languages\Italian.isl"; InfoAfterFile: "locale\it\AfterInstallPyScripter-{#OSPlatform}.txt"
-Name: "ja"; MessagesFile: "compiler:\Languages\Japanese.isl"; InfoAfterFile: "locale\ja\AfterInstallPyScripter-{#OSPlatform}.txt"
+;Name: "de"; MessagesFile: "compiler:\Languages\German.isl"; InfoAfterFile: "locale\de\AfterInstallPyScripter-{#OSPlatform}.txt"
+;Name: "el"; MessagesFile: "compiler:\Languages\Greek.isl"; InfoAfterFile: "locale\el\AfterInstallPyScripter-{#OSPlatform}.txt"
+;Name: "it"; MessagesFile: "compiler:\Languages\Italian.isl"; InfoAfterFile: "locale\it\AfterInstallPyScripter-{#OSPlatform}.txt"
+;Name: "ja"; MessagesFile: "compiler:\Languages\Japanese.isl"; InfoAfterFile: "locale\ja\AfterInstallPyScripter-{#OSPlatform}.txt"
 
 [Tasks]
 Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
@@ -243,9 +243,9 @@ Filename: {app}\PyScripter.exe; Description: {cm:LaunchProgram,PyScripter}; Flag
 
 [CustomMessages]
 #include "locale\en\InstallMessages.txt"
-#include "locale\de\InstallMessages.txt"
-#include "locale\el\InstallMessages.txt"
-#include "locale\it\InstallMessages.txt"
-#include "locale\ja\InstallMessages.txt"
+;#include "locale\de\InstallMessages.txt"
+;#include "locale\el\InstallMessages.txt"
+;#include "locale\it\InstallMessages.txt"
+;#include "locale\ja\InstallMessages.txt"
 
 ;#expr SaveToFile(AddBackslash(SourcePath) + "Preprocessed.iss")
