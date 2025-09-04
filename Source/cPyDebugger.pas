@@ -1423,6 +1423,7 @@ begin
               end;
               ErrorPos.Editor := Editor;
               ErrorPos.IsSyntax := True;
+              PyControl.DoErrorPosChanged(ErrorPos);
             end;
             Py_XDECREF(PyErrType);
             Py_XDECREF(PyErrValue);
