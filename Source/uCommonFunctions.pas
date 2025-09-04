@@ -1269,7 +1269,7 @@ begin
           end else begin
             EncodedString := PyUnicode_AsEncodedString(UniPy, PAnsiChar(AnsiString(PyEncoding)), 'replace');
             CheckError;
-            EncodedText := PyUnicodeAsUTF8String(EncodedString);
+            EncodedText := PyObjectAsString(EncodedString);
             CheckError;
           end;
         finally

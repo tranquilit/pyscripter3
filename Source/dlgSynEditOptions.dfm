@@ -8,7 +8,7 @@ inherited fmEditorOptionsDialog: TfmEditorOptionsDialog
   ShowHint = True
   OnShow = FormShow
   ExplicitWidth = 573
-  ExplicitHeight = 450
+  ExplicitHeight = 449
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -29,8 +29,6 @@ inherited fmEditorOptionsDialog: TfmEditorOptionsDialog
       Align = alTop
       ActiveTabIndex = 0
       TabAutofit = True
-      ExplicitLeft = 2
-      ExplicitTop = 7
       HiddenItems = <>
       object SpTBXTabItem1: TSpTBXTabItem
         Caption = 'Display'
@@ -97,6 +95,7 @@ inherited fmEditorOptionsDialog: TfmEditorOptionsDialog
           Gutter.Font.Height = -11
           Gutter.Font.Name = 'Courier New'
           Gutter.Font.Style = []
+          Gutter.Font.Quality = fqClearTypeNatural
           Gutter.Visible = False
           Gutter.Width = 0
           RightEdge = 0
@@ -240,6 +239,7 @@ inherited fmEditorOptionsDialog: TfmEditorOptionsDialog
           Gutter.Font.Height = -11
           Gutter.Font.Name = 'Courier New'
           Gutter.Font.Style = []
+          Gutter.Font.Quality = fqClearTypeNatural
           Gutter.Visible = False
           Gutter.Width = 0
           RightEdge = 0

@@ -197,7 +197,7 @@ begin
   fPythonEngine.FatalMsgDlg := False;
   fPythonEngine.UseLastKnownVersion := False;
   fPythonEngine.AutoFinalize := False;
-  fPythonEngine.InitThreads := True;
+  //fPythonEngine.InitThreads := True;
   fPythonEngine.IO := GI_PyInterpreter.PythonIO;
   fPythonEngine.PyFlags := [pfInteractive];
   fPythonEngine.OnAfterInit := PythonEngineAfterInit;
@@ -371,7 +371,12 @@ end;
 procedure TInternalPython.PythonEngineAfterInit(Sender: TObject);
 begin
   // Execute initialization script
-  PythonEngine.ExecStrings(GI_PyIDEServices.GetStoredScript('InitScript'));
+  with PythonEngine do begin
+    if IsPython3000 then
+      ExecStrings(GI_PyIDEServices.GetStoredScript('InitScript3000'))
+    else
+      ExecStrings(GI_PyIDEServices.GetStoredScript('InitScript'));
+  end;
 
   // Update Highlighter keywords
   GI_PyInterpreter.UpdatePythonKeywords;

@@ -45,7 +45,7 @@ inherited PythonIIForm: TPythonIIForm
   Position = poDefault
   OnHelp = FormHelp
   ExplicitWidth = 717
-  ExplicitHeight = 490
+  ExplicitHeight = 485
   PixelsPerInch = 96
   TextHeight = 13
   inherited BGPanel: TPanel
@@ -88,10 +88,10 @@ inherited PythonIIForm: TPythonIIForm
         Gutter.Font.Height = -11
         Gutter.Font.Name = 'Courier New'
         Gutter.Font.Style = []
+        Gutter.Font.Quality = fqClearTypeNatural
         Gutter.Visible = False
         Gutter.Width = 0
         Gutter.Gradient = True
-        Options = [eoDragDropEditing, eoEnhanceHomeKey, eoGroupUndo, eoHideShowScrollbars, eoKeepCaretX, eoShowScrollHint, eoTabIndent, eoTabsToSpaces]
         RightEdge = 0
         TabWidth = 4
         WantTabs = True

@@ -99,6 +99,7 @@ object EditorForm: TEditorForm
           Gutter.Font.Height = -11
           Gutter.Font.Name = 'Courier New'
           Gutter.Font.Style = []
+          Gutter.Font.Quality = fqClearTypeNatural
           Gutter.Gradient = True
           Gutter.GradientSteps = 30
           SelectedColor.Background = clSkyBlue
@@ -257,10 +258,6 @@ object EditorForm: TEditorForm
               ShortCut = 8
             end
             item
-              Command = ecDeleteLastChar
-              ShortCut = 8200
-            end
-            item
               Command = ecDeleteLastWord
               ShortCut = 16392
             end
@@ -425,22 +422,6 @@ object EditorForm: TEditorForm
               ShortCut = 24633
             end
             item
-              Command = ecNormalSelect
-              ShortCut = 24654
-            end
-            item
-              Command = ecColumnSelect
-              ShortCut = 24643
-            end
-            item
-              Command = ecLineSelect
-              ShortCut = 24652
-            end
-            item
-              Command = ecMatchBracket
-              ShortCut = 24642
-            end
-            item
               Command = ecFoldAll
               ShortCut = 24765
             end
@@ -518,6 +499,7 @@ object EditorForm: TEditorForm
           Gutter.Font.Height = -11
           Gutter.Font.Name = 'Courier New'
           Gutter.Font.Style = []
+          Gutter.Font.Quality = fqClearTypeNatural
           OnMouseCursor = SynEditMouseCursor
           OnSpecialLineColors = SynEditSpecialLineColors
           OnStatusChange = SynEditStatusChange
@@ -668,10 +650,6 @@ object EditorForm: TEditorForm
               ShortCut = 8
             end
             item
-              Command = ecDeleteLastChar
-              ShortCut = 8200
-            end
-            item
               Command = ecDeleteLastWord
               ShortCut = 16392
             end
@@ -834,22 +812,6 @@ object EditorForm: TEditorForm
             item
               Command = ecSetMarker9
               ShortCut = 24633
-            end
-            item
-              Command = ecNormalSelect
-              ShortCut = 24654
-            end
-            item
-              Command = ecColumnSelect
-              ShortCut = 24643
-            end
-            item
-              Command = ecLineSelect
-              ShortCut = 24652
-            end
-            item
-              Command = ecMatchBracket
-              ShortCut = 24642
             end
             item
               Command = ecFoldAll

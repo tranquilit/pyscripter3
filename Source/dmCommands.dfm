@@ -210,9 +210,6 @@ object CommandsDataModule: TCommandsDataModule
     Top = 72
   end
   object SynIniSyn: TSynIniSyn
-    Options.AutoDetectEnabled = False
-    Options.AutoDetectLineLimit = 0
-    Options.Visible = False
     Left = 344
     Top = 324
   end
@@ -294,7 +291,7 @@ object CommandsDataModule: TCommandsDataModule
           '            try:'
           '                try:'
           '                    bdb.Bdb.run(self, cmd, globals, locals)'
-          '                except SystemExit, e:'
+          '                except (SystemExit, e):'
           '                    if isinstance(e.code, basestring):'
           '                        print e.code'
           '                    elif isinstance(e.code, int):'
@@ -425,7 +422,7 @@ object CommandsDataModule: TCommandsDataModule
           '        try:'
           '            try:'
           '                exec cmd in globals, locals'
-          '            except SystemExit, e:'
+          '            except (SystemExit, e):'
           '                if isinstance(e.code, basestring):'
           '                    print e.code'
           '                elif isinstance(e.code, int):'
@@ -637,7 +634,7 @@ object CommandsDataModule: TCommandsDataModule
           '                    pass'
           '            else:'
           '                exec code in self.locals'
-          '        except SystemExit, e:'
+          '        except (SystemExit, e):'
           '            if isinstance(e.code, basestring):'
           '                print e.code'
           '            elif isinstance(e.code, int):'
@@ -1552,7 +1549,7 @@ object CommandsDataModule: TCommandsDataModule
           '            try:'
           '                try:'
           '                    bdb.Bdb.run(self, cmd, globals, locals)'
-          '                except SystemExit, e:'
+          '                except (SystemExit, e):'
           '                    if isinstance(e.code, basestring):'
           '                        print e.code'
           '                    elif isinstance(e.code, int):'
@@ -1854,7 +1851,7 @@ object CommandsDataModule: TCommandsDataModule
           '                    pass'
           '            else:'
           '              exec code in self.locals'
-          '        except SystemExit, e:'
+          '        except (SystemExit, e):'
           '            if isinstance(e.code, basestring):'
           '                print e.code'
           '            elif isinstance(e.code, int):'
@@ -1976,7 +1973,7 @@ object CommandsDataModule: TCommandsDataModule
           '        try:'
           '            try:'
           '                exec cmd in globals, locals'
-          '            except SystemExit, e:'
+          '            except (SystemExit, e):'
           '                if isinstance(e.code, basestring):'
           '                    print e.code'
           '                elif isinstance(e.code, int):'
@@ -3513,10 +3510,10 @@ object CommandsDataModule: TCommandsDataModule
     Top = 68
   end
   object SynWebHtmlSyn: TSynWebHtmlSyn
-    Options.HtmlVersion = shvHtml5
-    Options.UseEngineOptions = True
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine
+    Options.HtmlVersion = shvHtml5
+    Options.UseEngineOptions = True
     Left = 432
     Top = 272
   end
@@ -3527,16 +3524,13 @@ object CommandsDataModule: TCommandsDataModule
     Top = 328
   end
   object SynWebCssSyn: TSynWebCssSyn
-    Options.HtmlVersion = shvHtml401Transitional
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine
+    Options.HtmlVersion = shvHtml401Transitional
     Left = 528
     Top = 324
   end
   object SynCppSyn: TSynCppSyn
-    Options.AutoDetectEnabled = False
-    Options.AutoDetectLineLimit = 0
-    Options.Visible = False
     Left = 344
     Top = 272
   end
@@ -4354,18 +4348,12 @@ object CommandsDataModule: TCommandsDataModule
   end
   object SynGeneralSyn: TSynGeneralSyn
     DefaultFilter = 'Text Files(*.txt,*.*)|*.txt;*.*'
-    Options.AutoDetectEnabled = False
-    Options.AutoDetectLineLimit = 0
-    Options.Visible = False
     DetectPreprocessor = False
     SpaceAttri.Foreground = clSilver
     Left = 264
     Top = 328
   end
   object SynJSONSyn: TSynJSONSyn
-    Options.AutoDetectEnabled = False
-    Options.AutoDetectLineLimit = 0
-    Options.Visible = False
     Left = 264
     Top = 272
   end

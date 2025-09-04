@@ -605,28 +605,28 @@ begin
 
     (* parameters, valid for current Windows configuration *)
     // Python Paths etc.
-    RegisterParameter('Python27Dir', GetPythonDir('2.7'), nil);
-    RegisterParameter('Python32Dir', GetPythonDir('3.2'), nil);
-    RegisterParameter('Python33Dir', GetPythonDir('3.3'), nil);
-    RegisterParameter('Python34Dir', GetPythonDir('3.4'), nil);
-    RegisterParameter('Python35Dir', GetPythonDir('3.5'), nil);
-    RegisterParameter('Python36Dir', GetPythonDir('3.6'), nil);
-    RegisterParameter('Python37Dir', GetPythonDir('3.7'), nil);
     RegisterParameter('Python38Dir', GetPythonDir('3.8'), nil);
     RegisterParameter('Python39Dir', GetPythonDir('3.9'), nil);
-    RegisterParameter('Python27Exe', '$[PYTHON27DIR]python.exe', nil);
-    RegisterParameter('Python32Exe', '$[PYTHON32DIR]python.exe', nil);
-    RegisterParameter('Python33Exe', '$[PYTHON33DIR]python.exe', nil);
-    RegisterParameter('Python34Exe', '$[PYTHON34DIR]python.exe', nil);
-    RegisterParameter('Python35Exe', '$[PYTHON35DIR]python.exe', nil);
-    RegisterParameter('Python36Exe', '$[PYTHON36DIR]python.exe', nil);
-    RegisterParameter('Python37Exe', '$[PYTHON37DIR]python.exe', nil);
+    RegisterParameter('Python310Dir', GetPythonDir('3.10'), nil);
+    RegisterParameter('Python311Dir', GetPythonDir('3.11'), nil);
+    RegisterParameter('Python312Dir', GetPythonDir('3.12'), nil);
+    RegisterParameter('Python313Dir', GetPythonDir('3.13'), nil);
+    RegisterParameter('Python314Dir', GetPythonDir('3.14'), nil);
     RegisterParameter('Python38Exe', '$[PYTHON38DIR]python.exe', nil);
     RegisterParameter('Python39Exe', '$[PYTHON39DIR]python.exe', nil);
-    RegisterParameter('PythonDir', _('Directory of active Python version'), GetActivePythonDir);
-    RegisterParameter('PythonExe', _('Executable of active Python'), GetActivePythonExe);
-    RegisterParameter('PythonwExe', _('Executable of active Python'), GetActivePythonwExe);
-    RegisterParameter('PythonVersion', _('Version of active Python'), GetPythonVersion);
+    RegisterParameter('Python310Exe', '$[PYTHON310DIR]python.exe', nil);
+    RegisterParameter('Python311Exe', '$[PYTHON311DIR]python.exe', nil);
+    RegisterParameter('Python312Exe', '$[PYTHON312DIR]python.exe', nil);
+    RegisterParameter('Python313Exe', '$[PYTHON313DIR]python.exe', nil);
+    RegisterParameter('Python314Exe', '$[PYTHON314DIR]python.exe', nil);
+    RegisterParameter('PythonDir', _('Directory of active Python version'),
+      GetActivePythonDir);
+    RegisterParameter('PythonExe', _('Executable of active Python'),
+      GetActivePythonExe);
+    RegisterParameter('PythonwExe', _('Executable of active Python'),
+      GetActivePythonwExe);
+    RegisterParameter('PythonVersion', _('Version of active Python'),
+      GetPythonVersion);
 
     // register system paths and parameters
     RegisterParameter('ProgramFiles', _('Program Files directory'), GetProgramFilesFolder);
@@ -708,27 +708,24 @@ end;
 procedure UnRegisterStandardParametersAndModifiers;
 begin
   // unregister parameter modifiers
-  with Parameters do begin
+  with Parameters do
+  begin
     (* parameters, valid for current Windows configuration *)
     // Python Paths etc.
-    UnRegisterParameter('Python27Dir');
-    UnRegisterParameter('Python32Dir');
-    UnRegisterParameter('Python33Dir');
-    UnRegisterParameter('Python34Dir');
-    UnRegisterParameter('Python35Dir');
-    UnRegisterParameter('Python36Dir');
-    UnRegisterParameter('Python37Dir');
     UnRegisterParameter('Python38Dir');
     UnRegisterParameter('Python39Dir');
-    UnRegisterParameter('Python27Exe');
-    UnRegisterParameter('Python32Exe');
-    UnRegisterParameter('Python33Exe');
-    UnRegisterParameter('Python34Exe');
-    UnRegisterParameter('Python35Exe');
-    UnRegisterParameter('Python36Exe');
-    UnRegisterParameter('Python37Exe');
+    UnRegisterParameter('Python310Dir');
+    UnRegisterParameter('Python311Dir');
+    UnRegisterParameter('Python312Dir');
+    UnRegisterParameter('Python313Dir');
+    UnRegisterParameter('Python314Dir');
     UnRegisterParameter('Python38Exe');
     UnRegisterParameter('Python39Exe');
+    UnRegisterParameter('Python310Exe');
+    UnRegisterParameter('Python311Exe');
+    UnRegisterParameter('Python312Exe');
+    UnRegisterParameter('Python313Exe');
+    UnRegisterParameter('Python314Exe');
     UnRegisterParameter('PythonDir');
     UnRegisterParameter('PythonExe');
     UnRegisterParameter('PythonwExe');

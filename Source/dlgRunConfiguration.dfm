@@ -5,7 +5,7 @@ inherited RunConfigurationForm: TRunConfigurationForm
   ClientWidth = 399
   OnDestroy = FormDestroy
   ExplicitWidth = 405
-  ExplicitHeight = 465
+  ExplicitHeight = 464
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -124,22 +124,14 @@ inherited RunConfigurationForm: TRunConfigurationForm
         Font.Quality = fqClearTypeNatural
         TabOrder = 0
         OnEnter = SynEditEnter
-        CodeFolding.GutterShapeSize = 11
-        CodeFolding.CollapsedLineColor = clGrayText
-        CodeFolding.FolderBarLinesColor = clGrayText
-        CodeFolding.IndentGuidesColor = clGray
-        CodeFolding.IndentGuides = True
-        CodeFolding.ShowCollapsedLine = False
-        CodeFolding.ShowHintMark = True
         UseCodeFolding = False
         Gutter.Font.Charset = DEFAULT_CHARSET
         Gutter.Font.Color = clWindowText
         Gutter.Font.Height = -11
         Gutter.Font.Name = 'Courier New'
         Gutter.Font.Style = []
-        Gutter.Width = 0
+        Gutter.Font.Quality = fqClearTypeNatural
         HideSelection = True
-        Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces]
         ScrollBars = ssNone
         WantReturns = False
       end
@@ -156,22 +148,14 @@ inherited RunConfigurationForm: TRunConfigurationForm
         Font.Quality = fqClearTypeNatural
         TabOrder = 2
         OnEnter = SynEditEnter
-        CodeFolding.GutterShapeSize = 11
-        CodeFolding.CollapsedLineColor = clGrayText
-        CodeFolding.FolderBarLinesColor = clGrayText
-        CodeFolding.IndentGuidesColor = clGray
-        CodeFolding.IndentGuides = True
-        CodeFolding.ShowCollapsedLine = False
-        CodeFolding.ShowHintMark = True
         UseCodeFolding = False
         Gutter.Font.Charset = DEFAULT_CHARSET
         Gutter.Font.Color = clWindowText
         Gutter.Font.Height = -11
         Gutter.Font.Name = 'Courier New'
         Gutter.Font.Style = []
-        Gutter.Width = 0
+        Gutter.Font.Quality = fqClearTypeNatural
         HideSelection = True
-        Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces]
         ScrollBars = ssNone
         WantReturns = False
       end
@@ -188,22 +172,14 @@ inherited RunConfigurationForm: TRunConfigurationForm
         Font.Quality = fqClearTypeNatural
         TabOrder = 3
         OnEnter = SynEditEnter
-        CodeFolding.GutterShapeSize = 11
-        CodeFolding.CollapsedLineColor = clGrayText
-        CodeFolding.FolderBarLinesColor = clGrayText
-        CodeFolding.IndentGuidesColor = clGray
-        CodeFolding.IndentGuides = True
-        CodeFolding.ShowCollapsedLine = False
-        CodeFolding.ShowHintMark = True
         UseCodeFolding = False
         Gutter.Font.Charset = DEFAULT_CHARSET
         Gutter.Font.Color = clWindowText
         Gutter.Font.Height = -11
         Gutter.Font.Name = 'Courier New'
         Gutter.Font.Style = []
-        Gutter.Width = 0
+        Gutter.Font.Quality = fqClearTypeNatural
         HideSelection = True
-        Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces]
         ScrollBars = ssNone
         WantReturns = False
       end
@@ -213,6 +189,7 @@ inherited RunConfigurationForm: TRunConfigurationForm
         Width = 19
         Height = 20
         ImageIndex = 0
+        ImageName = 'Item2'
         Images = vilImages
         TabOrder = 1
         OnClick = btnFileNameClick
@@ -223,6 +200,7 @@ inherited RunConfigurationForm: TRunConfigurationForm
         Width = 19
         Height = 20
         ImageIndex = 1
+        ImageName = 'Item46'
         Images = vilImages
         TabOrder = 4
         OnClick = btnWorkDirClick
@@ -233,6 +211,7 @@ inherited RunConfigurationForm: TRunConfigurationForm
         Width = 19
         Height = 20
         ImageIndex = 2
+        ImageName = 'Item162'
         Images = vilImages
         TabOrder = 5
         OnClick = btnRemoteFileNameClick
@@ -340,22 +319,14 @@ inherited RunConfigurationForm: TRunConfigurationForm
         Font.Quality = fqClearTypeNatural
         TabOrder = 1
         OnEnter = SynEditEnter
-        CodeFolding.GutterShapeSize = 11
-        CodeFolding.CollapsedLineColor = clGrayText
-        CodeFolding.FolderBarLinesColor = clGrayText
-        CodeFolding.IndentGuidesColor = clGray
-        CodeFolding.IndentGuides = True
-        CodeFolding.ShowCollapsedLine = False
-        CodeFolding.ShowHintMark = True
         UseCodeFolding = False
         Gutter.Font.Charset = DEFAULT_CHARSET
         Gutter.Font.Color = clWindowText
         Gutter.Font.Height = -11
         Gutter.Font.Name = 'Courier New'
         Gutter.Font.Style = []
-        Gutter.Width = 0
+        Gutter.Font.Quality = fqClearTypeNatural
         HideSelection = True
-        Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabsToSpaces]
         ScrollBars = ssNone
         WantReturns = False
       end
@@ -365,6 +336,7 @@ inherited RunConfigurationForm: TRunConfigurationForm
         Width = 19
         Height = 20
         ImageIndex = 0
+        ImageName = 'Item2'
         Images = vilImages
         TabOrder = 2
         OnClick = btnOutputFileNameClick
