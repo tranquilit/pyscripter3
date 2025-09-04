@@ -226,7 +226,7 @@ Var
 begin
   WasLoaded := Loaded;
   if WasLoaded then begin
-    TPythonThread.Py_End_Allow_Threads;
+    //TPythonThread.Py_End_Allow_Threads;
     PyscripterModule.DeleteVar('IDEOptions');
     RegVersion := fPythonEngine.RegVersion;
     Delete(RegVersion, 2, 1);

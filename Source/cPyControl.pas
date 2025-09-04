@@ -159,9 +159,11 @@ uses
   Vcl.Dialogs,
   JvGnugettext,
   JvJVCLUtils,
+  PythonEngine,
   VarPyth,
   StringResources,
   uCmdLine,
+  uCommonFunctions,
   cPyScripterSettings,
   cParameters,
   cPyDebugger,
@@ -689,6 +691,7 @@ begin
   if InternalPython.Loaded then
   begin
     GI_PyIDEServices.ClearPythonWindows;
+    //PyScripterRefactor.Cancel;
     PyScripterRefactor.ClearProxyModules;
   end;
 
@@ -709,6 +712,11 @@ begin
     fInternalInterpreter := TPyInternalInterpreter.Create(II);
     fActiveInterpreter := fInternalInterpreter;
     fActiveDebugger := TPyInternalDebugger.Create;
+
+    // Allow threads
+    //TPythonThread.Py_Begin_Allow_Threads;
+
+    // Execute python_init.py
     fInternalInterpreter.Initialize;
 
     // Execute pyscripter_init.py
