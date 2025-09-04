@@ -6,9 +6,9 @@
         <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
         <FrameworkType>VCL</FrameworkType>
         <MainSource>PyScripter.dpr</MainSource>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <ProjectGuid>{FD7531E1-BDA2-4EF3-A3E8-074B952317EF}</ProjectGuid>
-        <ProjectVersion>19.1</ProjectVersion>
+        <ProjectVersion>19.2</ProjectVersion>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -100,6 +100,9 @@
         <ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
         <Manifest_File>PyScripter.exe.manifest</Manifest_File>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <VerInfo_MinorVer>7</VerInfo_MinorVer>
+        <VerInfo_Release>0</VerInfo_Release>
+        <VerInfo_Keys>CompanyName=;FileDescription=PyScripter Python IDE;FileVersion=3.7.0.0;InternalName=;LegalCopyright=(c) Kiriakos Vlahos;LegalTrademarks=;OriginalFilename=PyScripter.exe;ProductName=PyScripter;ProductVersion=3.5.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
         <BT_BuildType>Debug</BT_BuildType>
@@ -342,8 +345,8 @@
                     <Source Name="MainSource">PyScripter.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Composants Microsoft Office 2000 Sample Automation Server Wrapper</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Composants Microsoft Office XP Sample Automation Server Wrapper</Excluded_Packages>
                 </Excluded_Packages>
                 <VersionInfo>
                     <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
