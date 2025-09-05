@@ -1211,7 +1211,7 @@ function WideStringsToEncodedText(const AFileName: string;
   IsPython: Boolean = False) : Boolean;
 // AFileName is passed just for the warning
 var
-  PyEncoding : string;
+  PyEncoding: AnsiString;
   UniPy, EncodedString : PPyObject;
   wStr: string;
   SuppressOutput : IInterface;
@@ -1232,13 +1232,13 @@ begin
   begin
     PyEncoding := '';
     if Lines.Count > 0 then
-      PyEncoding := ParsePySourceEncoding(Lines[0]);
+      PyEncoding := UTF8Encode(ParsePySourceEncoding(Lines[0]));
     if (PyEncoding = '') and (Lines.Count > 1) then
-      PyEncoding := ParsePySourceEncoding(Lines[1]);
+      PyEncoding := UTF8Encode(ParsePySourceEncoding(Lines[1]));
 
     with GetPythonEngine do begin
       if PyEncoding = '' then
-        PyEncoding := SysModule.getdefaultencoding();
+        PyEncoding := UTF8Encode(SysModule.getdefaultencoding());
       SuppressOutput := GI_PyInterpreter.OutputSuppressor; // Do not show errors
       UniPy := nil;
       EncodedString := nil;
@@ -1248,9 +1248,9 @@ begin
           CheckError;
           if InformationLossWarning then begin
             try
-              EncodedString := PyUnicode_AsEncodedString(UniPy, PAnsiChar(AnsiString(PyEncoding)), 'strict');
+              EncodedString := PyUnicode_AsEncodedString(UniPy, PAnsiChar(PyEncoding), 'strict');
               CheckError;
-              EncodedText := PyUnicodeAsUTF8String(EncodedString);
+              EncodedText := PyBytesAsAnsiString(EncodedString);
               CheckError;
             except
               on UnicodeEncodeError do begin
@@ -1259,17 +1259,19 @@ begin
                     [AFileName, PyEncoding]), mtWarning, [mbYes, mbCancel], 0)= mrYes;
                 if Result then begin
                   EncodedString := PyUnicode_AsEncodedString(UniPy,
-                    PAnsiChar(AnsiString(PyEncoding)), PAnsiChar(AnsiString('replace')));
+                    PAnsiChar(PyEncoding), 'replace');
                   CheckError;
-                  EncodedText := PyUnicodeAsUTF8String(EncodedString);
+                  EncodedText := PyBytesAsAnsiString(EncodedString);
                   CheckError;
                 end;
               end;
             end;
-          end else begin
-            EncodedString := PyUnicode_AsEncodedString(UniPy, PAnsiChar(AnsiString(PyEncoding)), 'replace');
+          end
+          else
+          begin
+            EncodedString := PyUnicode_AsEncodedString(UniPy, PAnsiChar(PyEncoding), 'replace');
             CheckError;
-            EncodedText := PyObjectAsString(EncodedString);
+            EncodedText := PyBytesAsAnsiString(EncodedString);
             CheckError;
           end;
         finally
@@ -1285,9 +1287,11 @@ begin
               [AFileName, PyEncoding]), mtWarning, [mbYes, mbCancel], 0)= mrYes ;
       end;
     end;
-  end else begin
-    EncodedText := AnsiString(wStr);
-    if InformationLossWarning and not IsAnsiOnly(wStr) then begin
+  end
+  else
+  begin
+    EncodedText := AnsiString(WStr);
+    if InformationLossWarning and not IsAnsiOnly(WStr) then begin
       Result :=
         Vcl.Dialogs.MessageDlg(Format(_(SFileEncodingWarning),
         [AFileName, 'ANSI']), mtWarning, [mbYes, mbCancel], 0)= mrYes ;
@@ -1341,33 +1345,21 @@ begin
       end;
 
       // Detect an encoding spec
-      PyEncoding := AnsiString(ParsePySourceEncoding(S));
+      PyEncoding := UTF8Encode(ParsePySourceEncoding(S));
       if PyEncoding = '' then begin
         S := Reader.ReadLine;
-        PyEncoding := AnsiString(ParsePySourceEncoding(S));
+        PyEncoding := UTF8Encode(ParsePySourceEncoding(S));
       end;
     finally
       Reader.Free;
     end;
 
-    if PyEncoding = '' then
-    begin
-      // Use default encoding: ANSI for python 2 UTF8 otherwise
-      Lines.LoadFromFile(AFileName);
-      Exit(True);
-    end;
-
-    // PyEncoding <> ''
-    if (LowerCase(PyEncoding) = 'utf-8') or (LowerCase(PyEncoding) = 'utf8') then
+    // if there is no encoding line or Python is not loaded use default encoding UTF8
+    if not GI_PyControl.PythonLoaded or (PyEncoding = '') or
+      (LowerCase(PyEncoding) = 'utf-8') or (LowerCase(PyEncoding) = 'utf8')
+    then
     begin
       Lines.LoadFromFile(AFileName, TEncoding.UTF8);
-      Exit(True);
-    end;
-
-    if not GI_PyControl.PythonLoaded then
-    begin
-      // Use default encoding: ANSI for python 2 UTF8 otherwise
-      Lines.LoadFromFile(AFileName);
       Exit(True);
     end;
 
@@ -1390,7 +1382,7 @@ begin
               Length(FileText),
               PAnsiChar(PyEncoding), 'replace');
             CheckError;
-            LoadFromString(UTF8Decode(PyUnicode_AsUTF8(PyWstr)));
+            LoadFromString(PyUnicodeAsString(PyWstr));
         finally
           Py_XDECREF(PyWstr);
         end;
