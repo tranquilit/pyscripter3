@@ -1,0 +1,39 @@
+[submodule "submodules/jcl"]
+	path = submodules/jcl
+	url = https://github.com/project-jedi/jcl
+[submodule "submodules/jvcl"]
+	path = submodules/jvcl
+	url = https://github.com/project-jedi/jvcl
+[submodule "submodules/delphi-detours-library"]
+	path = submodules/delphi-detours-library
+	url = https://github.com/MahdiSafsafi/delphi-detours-library.git
+[submodule "submodules/P4D"]
+	path = submodules/P4D
+	url = https://github.com/pyscripter/python4delphi.git
+[submodule "submodules/SpTBXLib"]
+	path = submodules/SpTBXLib
+	url = https://github.com/pyscripter/SpTBXLib.git
+[submodule "submodules/MustangPeakCommonLib"]
+	path = submodules/MustangPeakCommonLib
+	url = https://github.com/TurboPack/MustangPeakCommonLib.git
+[submodule "submodules/MustangPeakEasyListView"]
+	path = submodules/MustangPeakEasyListView
+	url = https://github.com/TurboPack/MustangPeakEasyListView.git
+[submodule "submodules/MustangPeakVirtualShellTools"]
+	path = submodules/MustangPeakVirtualShellTools
+	url = https://github.com/TurboPack/MustangPeakVirtualShellTools.git
+[submodule "submodules/SynEdit"]
+	path = submodules/SynEdit
+	url = https://github.com/TurboPack/SynEdit.git
+[submodule "submodules/TB2k"]
+	path = submodules/TB2k
+	url = https://github.com/tranquilit/TB2k.git
+[submodule "submodules/synweb"]
+	path = submodules/synweb
+	url = https://github.com/tranquilit/synweb
+[submodule "submodules/VirtualTreeView"]
+	path = submodules/VirtualTreeView
+	url = https://github.com/JAM-Software/Virtual-TreeView.git
+[submodule "submodules/zControls"]
+	path = submodules/zControls
+	url = https://github.com/MahdiSafsafi/zcontrols.git
