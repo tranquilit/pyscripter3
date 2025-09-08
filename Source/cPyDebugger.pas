@@ -899,10 +899,7 @@ begin
       if SFName.StartsWith('<') then
       begin
         FName := SFName;
-        if InternalInterpreter.IsPython3000 then
-          Source := CleanEOLs(SynEdit.Text)+WideLF
-        else
-          Source := CleanEOLs(EncodedText)+#10;
+        Source := CleanEOLs(SynEdit.Text)+WideLF;
         LineList := VarPythonCreate(Source);
         LineList := LineList.splitlines(True);
         fLineCache.cache.SetItem(VarPythonCreate(FName),
@@ -1198,21 +1195,16 @@ begin
   // Workaround due to PREFER_UNICODE flag to make sure
   // no conversion to Unicode and back will take place
   S := ToPythonFileName(ARunConfig.ScriptName);
-  if IsPython3000 then        // Issue 425
-    SysMod.argv.append(VarPythonCreate(S))
-  else
-    SysMod.argv.append(VarPythonCreate(AnsiString(S)));
+  SysMod.argv.append(VarPythonCreate(S));
 
   S := Trim(ARunConfig.Parameters);
   if S <> '' then begin
     S := Parameters.ReplaceInText(S);
     P := PChar(S);
-    while P[0] <> #0 do begin
+    while P[0] <> #0 do
+    begin
       P := GetParamStr(P, Param);
-      if IsPython3000 then        // Issue 425
-       SysMod.argv.append(VarPythonCreate(Param))
-      else
-       SysMod.argv.append(VarPythonCreate(AnsiString(Param)));
+      SysMod.argv.append(VarPythonCreate(Param))
     end;
     GI_PyInterpreter.AppendText(Format(_(SCommandLineMsg), [S]));
   end;

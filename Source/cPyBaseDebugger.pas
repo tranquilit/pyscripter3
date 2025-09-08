@@ -107,7 +107,6 @@ type
   public
     destructor Destroy; override;
     procedure Initialize; virtual;
-    function IsPython3000 : Boolean; virtual;
     // Python Path
     function SysPathAdd(const Path : string) : boolean; virtual; abstract;
     function SysPathRemove(const Path : string) : boolean; virtual; abstract;
@@ -406,11 +405,6 @@ begin
   end;
 end;
 
-function TPyBaseInterpreter.IsPython3000: Boolean;
-begin
-  Result := True;
-end;
-
 procedure TPyBaseInterpreter.ReInitialize;
 begin
   raise Exception.Create(_(SNotImplented));
@@ -421,14 +415,10 @@ Var
   Source : string;
   AnsiSource : AnsiString;
 begin
-  if FileExists(FileName) then begin
-    if IsPython3000 then begin
+  if FileExists(FileName) then
+  begin
       Source := CleanEOLs(FileToStr(FileName))+#10;
       RunSource(Source, FileName, 'exec');
-    end else begin
-      AnsiSource := CleanEOLs(FileToEncodedStr(FileName))+#10;
-      RunSource(AnsiSource, FileName, 'exec');
-    end;
   end;
 end;
 

@@ -372,10 +372,7 @@ procedure TInternalPython.PythonEngineAfterInit(Sender: TObject);
 begin
   // Execute initialization script
   with PythonEngine do begin
-    if IsPython3000 then
-      ExecStrings(GI_PyIDEServices.GetStoredScript('InitScript3000'))
-    else
-      ExecStrings(GI_PyIDEServices.GetStoredScript('InitScript'));
+    ExecStrings(GI_PyIDEServices.GetStoredScript('InitScript'));
   end;
 
   // Update Highlighter keywords

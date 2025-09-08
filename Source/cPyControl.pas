@@ -310,12 +310,13 @@ begin
   Result := False;
   if (DllPath = '') and (expectedVersion = '') then
   begin
-    if Length(fRegPythonVersions) > 0 then begin
+    if Length(fRegPythonVersions) > 0 then
+    begin
       fPythonVersionIndex := 0;
       Result := True;
     end;
   end
-  else if DllPath = '' then
+  else if (DllPath = '') and (Length(fRegPythonVersions)>0) then
   begin
     for I := 0 to Length(fRegPythonVersions) - 1 do
       if fRegPythonVersions[I].SysVersion = expectedVersion then
@@ -329,15 +330,18 @@ begin
   begin
     for I := 0 to Length(CustomPythonVersions) -1 do
       if (CustomPythonVersions[I].DLLPath = DLLPath) or
-         (CustomPythonVersions[I].InstallPath = DLLPath) then
+         (CustomPythonVersions[I].InstallPath = DLLPath) or
+         (CustomPythonVersions[I].InstallPath = LastInstallPath) then
       begin
         Result := True;
         fPythonVersionIndex := -(I + 1);
         break;
       end;
-    if not Result then begin
+    if not Result then
+    begin
       Result := PythonVersionFromPath(DLLPath, Version);
-      if Result then begin
+      if Result then
+      begin
         SetLength(CustomPythonVersions, Length(CustomPythonVersions) + 1);
         CustomPythonVersions[Length(CustomPythonVersions)-1] := Version;
         fPythonVersionIndex := - Length(CustomPythonVersions);
@@ -801,7 +805,7 @@ begin
   finally
     CustomVersions.Free;
   end;
-  SysVersion := AppStorage.ReadString(PythonVersionsKey+'\SysVerion');
+  SysVersion := AppStorage.ReadString(PythonVersionsKey+'\SysVersion');
   InstallPath := AppStorage.ReadString(PythonVersionsKey+'\InstallPath');
 
   ActiveSSHServerName  := AppStorage.ReadString('SSHServer');
@@ -824,7 +828,7 @@ begin
 
   if InternalPython.Loaded then begin
     if fPythonVersionIndex >= 0 then
-      AppStorage.WriteString(PythonVersionsKey+'\SysVerion', PythonVersion.SysVersion)
+      AppStorage.WriteString(PythonVersionsKey+'\SysVersion', PythonVersion.SysVersion)
     else
       AppStorage.WriteString(PythonVersionsKey+'\InstallPath', PythonVersion.InstallPath);
   end;
