@@ -1,3 +1,5 @@
+WARNING: This is an **unofficial** branch which adds Python 3.10 compatibility to legacy PyScripter 3.6.4
+
 PyScripter is a free and open-source  Python Integrated Development
 Environment (IDE) created with the ambition to become competitive in
 functionality with commercial Windows-based IDEs available for other
